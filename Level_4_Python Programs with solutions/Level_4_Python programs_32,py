@@ -1,0 +1,26 @@
+limit = 1000000
+
+is_prime = [True] * limit
+is_prime[0] = is_prime[1] = False
+
+for p in range(2, int(limit**0.5) + 1):
+  if is_prime[p]:
+    for i in range(p * p, limit, p):
+      is_prime[i] = False
+
+# Step 2: Iterate through primes and check digit sums
+count = 0
+for n in range(2, limit):
+  if is_prime[n]:
+    temp = n
+    digit_sum = 0
+    while temp > 0:
+      digit_sum += temp % 10
+      temp //= 10
+
+    if digit_sum == 14:
+      count += 1
+
+print(
+    "Total prime numbers below 1,000,000 with digit sum equal to 14:", count
+)
